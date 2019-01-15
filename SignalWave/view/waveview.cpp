@@ -1,6 +1,7 @@
 #include "waveview.h"
 #include "ui_waveview.h"
 #include "processing.h"
+#include "Signals/sinesignal.h"
 
 using namespace std;
 
@@ -29,30 +30,13 @@ WaveView::WaveView(QWidget *parent) :
     ui->fftWiget->setChart(fftChart);
 
     const int nSamples = 256;
-    double nSeconds = 1.0;                      // total time for sampling
-    double sampleRate = nSamples / nSeconds;    // n Hz = n / second
-    double freqResolution = sampleRate / nSamples; // freq step in FFT result
-    complex<double> x[nSamples];                // storage for sample data
-    complex<double> X[nSamples];                // storage for FFT answer
-    const int nFreqs = 1;
-    double freq[] = { 10, 240, 11, 17, 29,50 }; // known freqs for testing
 
-    for(int i=0; i<nSamples; i++) {
-        x[i] = complex<double>(0.,0.);
+    SineSignal  sSignal(20,1,nSamples);
 
-        for(int j=0; j<nFreqs; j++)
-            x[i] += sin( 2*M_PI*freq[j]*i/nSamples );
-        //X[i] = x[i];        // copy into X[] for FFT work & result
-    }
+    auto vectorSignal = sSignal.getVector();
 
-    p.meandr(x,nSamples);
-
-    for(int i=0; i<nSamples; i++) {
-       X[i] = x[i];
-    }
-
-    for(int i=0; i<nSamples; i++) {
-        signalSeries->append(i, x[i].real());
+    for(int i=0; i<vectorSignal.size(); i++) {
+        signalSeries->append(i, vectorSignal[i].real());
     }
 
 
@@ -60,7 +44,9 @@ WaveView::WaveView(QWidget *parent) :
     signalChart->createDefaultAxes();
 
 
-    p.fft2(X,nSamples);
+    complex<double> *X = vectorSignal.data();
+
+    p.fft2(X, vectorSignal.size());
 
     for(int i=0; i<nSamples/2; i++)
     {
