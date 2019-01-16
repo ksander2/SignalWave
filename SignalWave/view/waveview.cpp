@@ -31,7 +31,7 @@ WaveView::WaveView(QWidget *parent) :
 
     const int nSamples = 256;
 
-    SineSignal  sSignal(20,1,nSamples);
+    SineSignal  sSignal(50,1,nSamples);
 
     auto vectorSignal = sSignal.getVector();
 

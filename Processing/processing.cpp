@@ -4,8 +4,8 @@ using namespace std;
 
 Processing::Processing()
 {
-}
 
+}
 
 void Processing::separate (complex<double>* a, int n) {
     complex<double>* b = new complex<double>[n/2];  // get temp heap storage
