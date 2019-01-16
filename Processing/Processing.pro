@@ -24,11 +24,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         processing.cpp \
-    Signals/sinesignal.cpp
+    Signals/sinesignal.cpp \
+    Signals/sinesignal_p.cpp
 
 HEADERS += \
         processing.h \
-    Signals/sinesignal.h
+    Signals/sinesignal.h \
+    Signals/sinesignal_p.h
 
 unix {
     target.path = /usr/lib

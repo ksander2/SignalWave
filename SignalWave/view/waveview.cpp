@@ -33,7 +33,9 @@ WaveView::WaveView(QWidget *parent) :
 
     SineSignal  sSignal(50,1,nSamples);
 
-    auto vectorSignal = sSignal.getVector();
+    SineSignal s2 = sSignal;
+
+    auto vectorSignal = s2.getVector();
 
     for(int i=0; i<vectorSignal.size(); i++) {
         signalSeries->append(i, vectorSignal[i].real());
