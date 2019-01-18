@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QtCharts>
+#include "Signals/sinesignal.h"
 
 namespace Ui {
 class WaveView;
@@ -16,6 +17,11 @@ public:
     explicit WaveView(QWidget *parent = 0);
     ~WaveView();
 
+private slots:
+    void on_AppendButton_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::WaveView *ui;
 
@@ -24,6 +30,8 @@ private:
 
     QChart *signalChart;
     QChart *fftChart;
+
+    std::shared_ptr<SineSignal> sSignal;
 };
 
 #endif // WAVEVIEW_H

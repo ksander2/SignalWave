@@ -18,7 +18,19 @@ double SineSignalPrivate::getFreqResolution() const
 
 std::vector<std::complex<double> > SineSignalPrivate::getVector()
 {
-     return _data;
+    return _data;
+}
+
+void SineSignalPrivate::append(std::vector<std::complex<double> > data)
+{
+    if(_data.size() != data.size())
+    {
+        throw std::runtime_error("количество выборок не совпадает");
+    }
+
+    for (int i = 0; i < _data.size(); i++) {
+        _data[i] += data[i];
+    }
 }
 
 void SineSignalPrivate::calculate(std::vector<std::complex<double> > &data, int frequency, int samples)

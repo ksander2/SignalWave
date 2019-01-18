@@ -12,6 +12,8 @@ public:
     double getFreqResolution() const;
     std::vector<std::complex<double> > getVector();
 
+    void append(std::vector<std::complex<double> > data);
+
 private:
 
     int _frequency;

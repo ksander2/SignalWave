@@ -1,7 +1,6 @@
 #include "waveview.h"
 #include "ui_waveview.h"
 #include "processing.h"
-#include "Signals/sinesignal.h"
 
 using namespace std;
 
@@ -11,13 +10,9 @@ WaveView::WaveView(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    Processing p;
 
-    fftSeries = new QLineSeries();
-    signalSeries = new QLineSeries();
 
     signalChart = new QChart();
-
     fftChart = new QChart();
 
     signalChart->legend()->hide();
@@ -29,13 +24,32 @@ WaveView::WaveView(QWidget *parent) :
     ui->mainWaveWidget->setChart(signalChart);
     ui->fftWiget->setChart(fftChart);
 
-    const int nSamples = 256;
 
-    SineSignal  sSignal(50,1,nSamples);
+}
 
-    SineSignal s2 = sSignal;
+WaveView::~WaveView()
+{
+    delete ui;
+}
 
-    auto vectorSignal = s2.getVector();
+void WaveView::on_AppendButton_clicked()
+{
+    signalChart->removeAllSeries();
+    fftChart->removeAllSeries();
+
+    Processing p;
+
+    fftSeries = new QLineSeries();
+    signalSeries = new QLineSeries();
+
+
+
+
+    const int nSamples = ui->SampleSpinBx->value();
+
+    sSignal =  std::shared_ptr<SineSignal>(new SineSignal(ui->spinBox->value(), 1, nSamples));
+
+    auto vectorSignal = sSignal->getVector();
 
     for(int i=0; i<vectorSignal.size(); i++) {
         signalSeries->append(i, vectorSignal[i].real());
@@ -68,7 +82,8 @@ WaveView::WaveView(QWidget *parent) :
 
 }
 
-WaveView::~WaveView()
+void WaveView::on_pushButton_clicked()
 {
-    delete ui;
+    signalChart->removeAllSeries();
+    fftChart->removeAllSeries();
 }

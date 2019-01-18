@@ -18,6 +18,9 @@ public:
 
     double getFreqResolution() const;
 
+    void append(SineSignal &signal);
+
+
 private:
     std::shared_ptr<SineSignalPrivate> d_ptr;
 };

@@ -24,3 +24,8 @@ double SineSignal::getFreqResolution() const
     return d_ptr->getFreqResolution();
 }
 
+void SineSignal::append(SineSignal &signal)
+{
+    d_ptr->append(signal.getVector());
+}
+
