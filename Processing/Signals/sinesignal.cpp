@@ -29,3 +29,8 @@ void SineSignal::append(SineSignal &signal)
     d_ptr->append(signal.getVector());
 }
 
+int SineSignal::getSamples()
+{
+    return d_ptr->getSamples();
+}
+

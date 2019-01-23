@@ -20,6 +20,8 @@ public:
 
     void append(SineSignal &signal);
 
+    int getSamples();
+
 
 private:
     std::shared_ptr<SineSignalPrivate> d_ptr;

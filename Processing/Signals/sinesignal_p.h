@@ -14,6 +14,8 @@ public:
 
     void append(std::vector<std::complex<double> > data);
 
+    int getSamples() const;
+
 private:
 
     int _frequency;

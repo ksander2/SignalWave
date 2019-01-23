@@ -22,6 +22,7 @@ public:
 
 signals:
     void buildSineSignal(int frequency, int amplitude, int samples);
+    void addSineSignal(int frequency, int amplitude, int samples);
 
 private slots:
     void on_AppendButton_clicked();
@@ -38,6 +39,8 @@ private:
     QChart *fftChart;
 
     std::shared_ptr<SineSignal> sSignal;
+
+    void createFirstAxes();
 };
 
 #endif // WAVEVIEW_H

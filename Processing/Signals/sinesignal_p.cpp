@@ -33,6 +33,11 @@ void SineSignalPrivate::append(std::vector<std::complex<double> > data)
     }
 }
 
+int SineSignalPrivate::getSamples() const
+{
+    return _samples;
+}
+
 void SineSignalPrivate::calculate(std::vector<std::complex<double> > &data, int frequency, int samples)
 {
     for(int i=0; i<samples; i++) {

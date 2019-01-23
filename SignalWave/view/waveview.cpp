@@ -10,8 +10,6 @@ WaveView::WaveView(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
-
     signalChart = new QChart();
     fftChart = new QChart();
 
@@ -24,7 +22,7 @@ WaveView::WaveView(QWidget *parent) :
     ui->mainWaveWidget->setChart(signalChart);
     ui->fftWiget->setChart(fftChart);
 
-
+    createFirstAxes();
 }
 
 WaveView::~WaveView()
@@ -39,8 +37,16 @@ void WaveView::on_AppendButton_clicked()
 
 void WaveView::on_pushButton_clicked()
 {
-    signalChart->removeAllSeries();
-    fftChart->removeAllSeries();
+    emit addSineSignal(ui->spinBox->value(),1 ,ui->SampleSpinBx->value());
+}
+
+void WaveView::createFirstAxes()
+{
+    QLineSeries * series = new QLineSeries;
+    series->append(0, 0);
+    series->append(100,0);
+    signalChart->addSeries(series);
+    signalChart->createDefaultAxes();
 }
 
 void WaveView::updateView(WaveModel &model)
@@ -74,3 +80,4 @@ void WaveView::updateView(WaveModel &model)
     signalChart->createDefaultAxes();
     fftChart->createDefaultAxes();
 }
+

@@ -9,13 +9,17 @@ class WavePresenter : public QObject
     Q_OBJECT
 public:
     WavePresenter();
+    virtual ~WavePresenter();
+
     void showView();
 
 
 private:
     WaveView *_waveView;
-    std::shared_ptr<SineSignal> sSignal;
+    SineSignal *sSignal;
     void buildSignal(int frequency, int amplitude, int samples);
+    void addSineSignal(int frequency, int amplitude, int samples);
+    void addSineSignalToView(SineSignal *signal);
 
 };
 
