@@ -30,7 +30,8 @@ SOURCES += \
 
 HEADERS += \
         view/waveview.h \
-        presenter/wavepresenter.h
+        presenter/wavepresenter.h \
+        model/wavemodel.h
 
 FORMS += \
         desinger/waveview.ui

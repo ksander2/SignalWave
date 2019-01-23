@@ -34,42 +34,35 @@ WaveView::~WaveView()
 
 void WaveView::on_AppendButton_clicked()
 {
+    emit buildSineSignal(ui->spinBox->value(),1 ,ui->SampleSpinBx->value());
+}
+
+void WaveView::on_pushButton_clicked()
+{
     signalChart->removeAllSeries();
     fftChart->removeAllSeries();
+}
 
-    Processing p;
+void WaveView::updateView(WaveModel &model)
+{
+    signalChart->removeAllSeries();
+    fftChart->removeAllSeries();
 
     fftSeries = new QLineSeries();
     signalSeries = new QLineSeries();
 
-
-
-
-    const int nSamples = ui->SampleSpinBx->value();
-
-    sSignal =  std::shared_ptr<SineSignal>(new SineSignal(ui->spinBox->value(), 1, nSamples));
-
-    auto vectorSignal = sSignal->getVector();
-
-    for(int i=0; i<vectorSignal.size(); i++) {
-        signalSeries->append(i, vectorSignal[i].real());
+    for(int i=0; i<model.signal.size(); i++) {
+        signalSeries->append(i, model.signal[i].real());
     }
 
-
     signalChart->addSeries(signalSeries);
-    signalChart->createDefaultAxes();
 
-
-    complex<double> *X = vectorSignal.data();
-
-    p.fft2(X, vectorSignal.size());
-
-    for(int i=0; i<nSamples/2; i++)
+    for(int i=0; i<model.samplesFft/2; i++)
     {
         QLineSeries * series = new QLineSeries;
 
         series->append(i,0);
-        series->append(i,abs(X[i]));
+        series->append(i,abs(model.fft[i]));
 
         QPen p(QColor("blue"));
         p.setWidth(2);
@@ -78,12 +71,6 @@ void WaveView::on_AppendButton_clicked()
         fftChart->addSeries(series);
     }
 
+    signalChart->createDefaultAxes();
     fftChart->createDefaultAxes();
-
-}
-
-void WaveView::on_pushButton_clicked()
-{
-    signalChart->removeAllSeries();
-    fftChart->removeAllSeries();
 }

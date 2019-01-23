@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtCharts>
 #include "Signals/sinesignal.h"
+#include "model/wavemodel.h"
 
 namespace Ui {
 class WaveView;
@@ -16,6 +17,11 @@ class WaveView : public QMainWindow
 public:
     explicit WaveView(QWidget *parent = 0);
     ~WaveView();
+
+    void updateView(WaveModel &model);
+
+signals:
+    void buildSineSignal(int frequency, int amplitude, int samples);
 
 private slots:
     void on_AppendButton_clicked();

@@ -74,7 +74,7 @@
        <item row="2" column="0">
         <widget class="QPushButton" name="AppendButton">
          <property name="text">
-          <string>принять</string>
+          <string>Построить</string>
          </property>
         </widget>
        </item>
