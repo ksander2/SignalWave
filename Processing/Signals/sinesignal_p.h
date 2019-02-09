@@ -3,29 +3,14 @@
 
 #include <vector>
 #include <complex>
+#include "basesignal_p.h"
 
-class SineSignalPrivate
+class SineSignalPrivate : public BaseSignal_p
 {
 public:
     SineSignalPrivate(int frequency, double period, int samples);
-
-    double getFreqResolution() const;
-    std::vector<std::complex<double> > getVector();
-
-    void append(std::vector<std::complex<double> > data);
-
-    int getSamples() const;
-
 private:
-
-    int _frequency;
-    double _period;
-    int _samples;
-    double _freqResolution;
-
-    void calculate(std::vector<std::complex<double> > &data, int frequency, int samples);
-    std::vector<std::complex<double> > _data;
-
+      virtual void calculate(std::vector<std::complex<double> > &data, int frequency, int samples) override;
 };
 
 #endif // SINESIGNAL_P_H

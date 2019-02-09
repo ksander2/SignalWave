@@ -30,12 +30,14 @@ void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
     }
 
     sSignal = new SineSignal(frequency, amplitude, samples);
+    sSignal->computeSignal();
     addSineSignalToView(sSignal);
 }
 
 void WavePresenter::addSineSignal(int frequency, int amplitude, int samples)
 {
     SineSignal ss(frequency, amplitude, samples);
+    ss.computeSignal();
     sSignal->append(ss);
 
     addSineSignalToView(sSignal);

@@ -22,6 +22,8 @@ public:
 
     int getSamples();
 
+    void computeSignal();
+
 
 private:
     std::shared_ptr<SineSignalPrivate> d_ptr;

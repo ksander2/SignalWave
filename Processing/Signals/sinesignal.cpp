@@ -34,3 +34,8 @@ int SineSignal::getSamples()
     return d_ptr->getSamples();
 }
 
+void SineSignal::computeSignal()
+{
+    d_ptr->computeSignal();
+}
+
