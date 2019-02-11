@@ -34,7 +34,9 @@ SOURCES += \
     Signals/basesignal_p.cpp \
     Signals/squaresignal_p.cpp \
     Signals/sawsignal_p.cpp \
-    Signals/sawsignal.cpp
+    Signals/sawsignal.cpp \
+    Signals/trianglesingnal_p.cpp \
+    Signals/trianglesignal.cpp
 
 
 HEADERS += \
@@ -47,7 +49,9 @@ HEADERS += \
     Signals/squaresignal_p.h \
     Signals/isignal.h \
     Signals/sawsignal_p.h \
-    Signals/sawsignal.h
+    Signals/sawsignal.h \
+    Signals/trianglesingnal_p.h \
+    Signals/trianglesignal.h
 
 unix {
     target.path = /usr/lib

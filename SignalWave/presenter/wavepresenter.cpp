@@ -3,6 +3,7 @@
 
 #include "Signals/squaresignal.h"
 #include "Signals/sawsignal.h"
+#include "Signals/trianglesignal.h"
 
 WavePresenter::WavePresenter()
     : _waveView(new WaveView),
@@ -42,6 +43,9 @@ void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
     case 2:
         sSignal = new SawSignal(frequency, amplitude, samples);
         break;
+    case 3:
+        sSignal = new TriangleSignal(frequency, amplitude, samples);
+        break;
     default:
         break;
     }
@@ -51,12 +55,30 @@ void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
 
 void WavePresenter::addSineSignal(int frequency, int amplitude, int samples)
 {
+    ISignal  *ss;
 
-    SineSignal ss(frequency, amplitude, samples);
-    ss.computeSignal();
-    sSignal->append(ss);
+    switch (_waveView->getIndexSignalType()) {
+    case 0:
+        ss = new SineSignal(frequency, amplitude, samples);
+        break;
+    case 1:
+        ss = new SquareSignal(frequency, amplitude, samples);
+        break;
+    case 2:
+        ss = new SawSignal(frequency, amplitude, samples);
+        break;
+    case 3:
+        ss = new TriangleSignal(frequency, amplitude, samples);
+        break;
+    default:
+        break;
+    }
+
+    ss->computeSignal();
+    sSignal->append(*ss);
 
     addSineSignalToView(sSignal);
+    delete ss;
 
 }
 
