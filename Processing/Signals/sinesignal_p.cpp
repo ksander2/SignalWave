@@ -2,7 +2,7 @@
 
 SineSignalPrivate::SineSignalPrivate(int frequency, double period, int samples) : BaseSignal_p(frequency, period, samples)
 {
-    //computeSignal();
+
 }
 
 void SineSignalPrivate::calculate(std::vector<std::complex<double> > &data, int frequency, int samples)

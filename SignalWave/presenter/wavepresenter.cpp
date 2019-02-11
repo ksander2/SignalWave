@@ -2,6 +2,7 @@
 #include "processing.h"
 
 #include "Signals/squaresignal.h"
+#include "Signals/sawsignal.h"
 
 WavePresenter::WavePresenter()
     : _waveView(new WaveView),
@@ -37,6 +38,9 @@ void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
         break;
     case 1:
         sSignal = new SquareSignal(frequency, amplitude, samples);
+        break;
+    case 2:
+        sSignal = new SawSignal(frequency, amplitude, samples);
         break;
     default:
         break;

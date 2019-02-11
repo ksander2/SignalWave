@@ -3,7 +3,8 @@
 SignalTypeModel::SignalTypeModel(QObject *parent) : QAbstractListModel(parent)
 {
     m_content   << qMakePair( DataPair::first_type( "Sine" ), DataPair::second_type( 0 ) )
-                << qMakePair( DataPair::first_type( "Square" ), DataPair::second_type( 0 ) );
+                << qMakePair( DataPair::first_type( "Square" ), DataPair::second_type( 1 ) )
+                << qMakePair( DataPair::first_type( "saw" ), DataPair::second_type( 2 ) );
 }
 
 QVariant SignalTypeModel::data( const QModelIndex &index, int role ) const
