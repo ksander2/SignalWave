@@ -1,10 +1,6 @@
 #ifndef ISIGNAL_H
 #define ISIGNAL_H
 
-#include <vector>
-#include <complex>
-#include <memory>
-
 class ISignal
 {
 public:

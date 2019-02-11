@@ -29,28 +29,28 @@ QMAKE_CXXFLAGS += -O0
 SOURCES += \
         processing.cpp \
     Signals/sinesignal.cpp \
-    Signals/sinesignal_p.cpp \
+    Signals/pimpl/sinesignal_p.cpp \
     Signals/squaresignal.cpp \
-    Signals/basesignal_p.cpp \
-    Signals/squaresignal_p.cpp \
-    Signals/sawsignal_p.cpp \
+    Signals/pimpl/basesignal_p.cpp \
+    Signals/pimpl/squaresignal_p.cpp \
+    Signals/pimpl/sawsignal_p.cpp \
     Signals/sawsignal.cpp \
-    Signals/trianglesingnal_p.cpp \
+    Signals/pimpl/trianglesingnal_p.cpp \
     Signals/trianglesignal.cpp
 
 
 HEADERS += \
         processing.h \
     Signals/sinesignal.h \
-    Signals/sinesignal_p.h \
+    Signals/pimpl/sinesignal_p.h \
     Signals/squaresignal.h \
-    Signals/basesignal_p.h \
+    Signals/pimpl/basesignal_p.h \
     Signals/basesignal.h \
-    Signals/squaresignal_p.h \
+    Signals/pimpl/squaresignal_p.h \
     Signals/isignal.h \
-    Signals/sawsignal_p.h \
+    Signals/pimpl/sawsignal_p.h \
     Signals/sawsignal.h \
-    Signals/trianglesingnal_p.h \
+    Signals/pimpl/trianglesingnal_p.h \
     Signals/trianglesignal.h
 
 unix {

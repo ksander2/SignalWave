@@ -1,9 +1,6 @@
 #ifndef SAWSIGNAL_H
 #define SAWSIGNAL_H
 
-#include <vector>
-#include <complex>
-#include <memory>
 #include "basesignal.h"
 
 class SawSignalPrivate;

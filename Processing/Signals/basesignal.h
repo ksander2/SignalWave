@@ -6,14 +6,13 @@
 #include <memory>
 
 #include "isignal.h"
-#include "sinesignal_p.h"
 
 template <typename T>
 class BaseSignal : public ISignal
 {
 public:
     explicit BaseSignal(int frequency, double period, int samples)
-         : d_ptr(new T(frequency, period, samples))
+        : d_ptr(new T(frequency, period, samples))
     {
 
     }
@@ -30,7 +29,7 @@ public:
 
     double getFreqResolution() const override
     {
-          return d_ptr->getFreqResolution();
+        return d_ptr->getFreqResolution();
     }
 
     void append(ISignal &signal) override
@@ -40,12 +39,12 @@ public:
 
     int getSamples() override
     {
-         return d_ptr->getSamples();
+        return d_ptr->getSamples();
     }
 
     void computeSignal() override
     {
-         d_ptr->computeSignal();
+        d_ptr->computeSignal();
     }
 
 protected:

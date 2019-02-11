@@ -1,9 +1,6 @@
 #ifndef SINESIGNAL_H
 #define SINESIGNAL_H
 
-#include <vector>
-#include <complex>
-#include <memory>
 #include "basesignal.h"
 
 class SineSignalPrivate;

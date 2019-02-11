@@ -47,11 +47,17 @@ void WaveView::on_pushButton_clicked()
 
 void WaveView::createFirstAxes()
 {
-    QLineSeries * series = new QLineSeries;
-    series->append(0, 0);
-    series->append(100,0);
-    signalChart->addSeries(series);
+    QLineSeries * signalSeries = new QLineSeries;
+    signalSeries->append(0, 0);
+    signalSeries->append(100,0);
+    signalChart->addSeries(signalSeries);
     signalChart->createDefaultAxes();
+
+    QLineSeries * fftSeries = new QLineSeries;
+    fftSeries->append(0, 0);
+    fftSeries->append(100,0);
+    fftChart->addSeries(fftSeries);
+    fftChart->createDefaultAxes();
 }
 
 void WaveView::updateView(WaveModel &model)

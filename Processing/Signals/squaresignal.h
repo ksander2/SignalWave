@@ -8,7 +8,7 @@ class SquareSignalPrivate;
 class SquareSignal : public BaseSignal<SquareSignalPrivate>
 {
 public:
-    SquareSignal(int frequency, double period, int samples);
+    explicit SquareSignal(int frequency, double period, int samples);
 };
 
 #endif // SQUARESIGNAL_H

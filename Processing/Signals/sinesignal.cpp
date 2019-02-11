@@ -1,5 +1,5 @@
 #include "sinesignal.h"
-#include "sinesignal_p.h"
+#include "pimpl/sinesignal_p.h"
 
 using namespace std;
 
