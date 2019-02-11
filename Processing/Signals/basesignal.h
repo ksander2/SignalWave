@@ -5,10 +5,11 @@
 #include <complex>
 #include <memory>
 
+#include "isignal.h"
 #include "sinesignal_p.h"
 
 template <typename T>
-class BaseSignal
+class BaseSignal : public ISignal
 {
 public:
     explicit BaseSignal(int frequency, double period, int samples)
@@ -22,27 +23,27 @@ public:
 
     }
 
-    std::vector<std::complex<double> > getVector()
+    std::vector<std::complex<double> > getVector() override
     {
         return d_ptr->getVector();
     }
 
-    double getFreqResolution() const
+    double getFreqResolution() const override
     {
           return d_ptr->getFreqResolution();
     }
 
-    void append(BaseSignal &signal)
+    void append(ISignal &signal) //override
     {
         d_ptr->append(signal.getVector());
     }
 
-    int getSamples()
+    int getSamples() override
     {
          return d_ptr->getSamples();
     }
 
-    void computeSignal()
+    void computeSignal() override
     {
          d_ptr->computeSignal();
     }

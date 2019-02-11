@@ -3,6 +3,7 @@
 
 #include "view/waveview.h"
 #include <QObject>
+#include "Signals/isignal.h"
 
 class WavePresenter : public QObject
 {
@@ -16,10 +17,11 @@ public:
 
 private:
     WaveView *_waveView;
-    SineSignal *sSignal;
+
+    ISignal *sSignal;
     void buildSignal(int frequency, int amplitude, int samples);
     void addSineSignal(int frequency, int amplitude, int samples);
-    void addSineSignalToView(SineSignal *signal);
+    void addSineSignalToView(ISignal *signal);
 
 };
 

@@ -1,6 +1,8 @@
 #include "wavepresenter.h"
 #include "processing.h"
 
+#include "Signals/squaresignal.h"
+
 WavePresenter::WavePresenter()
     : _waveView(new WaveView),
       sSignal(nullptr)
@@ -29,22 +31,26 @@ void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
         delete sSignal;
     }
 
-    sSignal = new SineSignal(frequency, amplitude, samples);
+   // sSignal = new SineSignal(frequency, amplitude, samples);
+    sSignal = new SquareSignal(frequency, amplitude, samples);
     sSignal->computeSignal();
     addSineSignalToView(sSignal);
 }
 
 void WavePresenter::addSineSignal(int frequency, int amplitude, int samples)
 {
+
     SineSignal ss(frequency, amplitude, samples);
     ss.computeSignal();
     sSignal->append(ss);
 
     addSineSignalToView(sSignal);
+
 }
 
-void WavePresenter::addSineSignalToView(SineSignal *signal)
+void WavePresenter::addSineSignalToView(ISignal *signal)
 {
+
     auto vectorSignal = signal->getVector();
 
     std::complex<double> *fftArray = vectorSignal.data();
@@ -58,4 +64,5 @@ void WavePresenter::addSineSignalToView(SineSignal *signal)
     model.signal = signal->getVector();
 
     _waveView->updateView(model);
+
 }

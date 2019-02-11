@@ -31,7 +31,8 @@ SOURCES += \
     Signals/sinesignal.cpp \
     Signals/sinesignal_p.cpp \
     Signals/squaresignal.cpp \
-    Signals/basesignal_p.cpp
+    Signals/basesignal_p.cpp \
+    Signals/squaresignal_p.cpp
 
 
 HEADERS += \
@@ -40,7 +41,9 @@ HEADERS += \
     Signals/sinesignal_p.h \
     Signals/squaresignal.h \
     Signals/basesignal_p.h \
-    Signals/basesignal.h
+    Signals/basesignal.h \
+    Signals/squaresignal_p.h \
+    Signals/isignal.h
 
 unix {
     target.path = /usr/lib
