@@ -5,24 +5,49 @@
 #include <complex>
 #include <memory>
 
+#include "sinesignal_p.h"
+
 template <typename T>
 class BaseSignal
 {
 public:
-    explicit BaseSignal(int frequency, double period, int samples);
-    ~BaseSignal();
+    explicit BaseSignal(int frequency, double period, int samples)
+         : d_ptr(new T(frequency, period, samples))
+    {
 
-    std::vector<std::complex<double> > getVector();
+    }
 
-    double getFreqResolution() const;
+    ~BaseSignal()
+    {
 
-    void append(BaseSignal &signal);
+    }
 
-    int getSamples();
+    std::vector<std::complex<double> > getVector()
+    {
+        return d_ptr->getVector();
+    }
 
-    void computeSignal();
+    double getFreqResolution() const
+    {
+          return d_ptr->getFreqResolution();
+    }
 
-private:
+    void append(BaseSignal &signal)
+    {
+        d_ptr->append(signal.getVector());
+    }
+
+    int getSamples()
+    {
+         return d_ptr->getSamples();
+    }
+
+    void computeSignal()
+    {
+         d_ptr->computeSignal();
+    }
+
+protected:
     std::shared_ptr<T> d_ptr;
 };
 

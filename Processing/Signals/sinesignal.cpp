@@ -3,39 +3,8 @@
 
 using namespace std;
 
-SineSignal::SineSignal(int frequency, double period, int samples)
-    : d_ptr(new SineSignalPrivate(frequency, period, samples))
+SineSignal::SineSignal(int frequency, double period, int samples) : BaseSignal<SineSignalPrivate>(frequency, period, samples)
 {
 
-}
-
-SineSignal::~SineSignal()
-{
-
-}
-
-std::vector<std::complex<double> > SineSignal::getVector()
-{
-    return d_ptr->getVector();
-}
-
-double SineSignal::getFreqResolution() const
-{
-    return d_ptr->getFreqResolution();
-}
-
-void SineSignal::append(SineSignal &signal)
-{
-    d_ptr->append(signal.getVector());
-}
-
-int SineSignal::getSamples()
-{
-    return d_ptr->getSamples();
-}
-
-void SineSignal::computeSignal()
-{
-    d_ptr->computeSignal();
 }
 
