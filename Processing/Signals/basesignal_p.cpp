@@ -41,12 +41,3 @@ void BaseSignal_p::computeSignal()
 {
      calculate(_data, _frequency, _samples);
 }
-
-/*
-void BaseSignal_p::calculate(std::vector<std::complex<double> > &data, int frequency, int samples)
-{
-    for(int i=0; i<samples; i++) {
-        data[i] = sin( 2*M_PI*frequency*i/samples );
-    }
-}
-*/

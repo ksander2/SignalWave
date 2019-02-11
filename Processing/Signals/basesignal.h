@@ -18,7 +18,7 @@ public:
 
     }
 
-    ~BaseSignal()
+    virtual ~BaseSignal()
     {
 
     }
@@ -33,7 +33,7 @@ public:
           return d_ptr->getFreqResolution();
     }
 
-    void append(ISignal &signal) //override
+    void append(ISignal &signal) override
     {
         d_ptr->append(signal.getVector());
     }

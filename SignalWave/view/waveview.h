@@ -19,6 +19,7 @@ public:
     ~WaveView();
 
     void updateView(WaveModel &model);
+    int getIndexSignalType();
 
 signals:
     void buildSineSignal(int frequency, int amplitude, int samples);

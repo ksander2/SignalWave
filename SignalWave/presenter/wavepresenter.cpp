@@ -31,8 +31,16 @@ void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
         delete sSignal;
     }
 
-   // sSignal = new SineSignal(frequency, amplitude, samples);
-    sSignal = new SquareSignal(frequency, amplitude, samples);
+    switch (_waveView->getIndexSignalType()) {
+    case 0:
+        sSignal = new SineSignal(frequency, amplitude, samples);
+        break;
+    case 1:
+        sSignal = new SquareSignal(frequency, amplitude, samples);
+        break;
+    default:
+        break;
+    }
     sSignal->computeSignal();
     addSineSignalToView(sSignal);
 }

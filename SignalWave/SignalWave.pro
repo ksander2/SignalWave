@@ -26,12 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         view/waveview.cpp \
-        presenter/wavepresenter.cpp
+        presenter/wavepresenter.cpp \
+    model/signaltypemodel.cpp
 
 HEADERS += \
         view/waveview.h \
         presenter/wavepresenter.h \
-        model/wavemodel.h
+        model/wavemodel.h \
+    model/signaltypemodel.h
 
 FORMS += \
         desinger/waveview.ui

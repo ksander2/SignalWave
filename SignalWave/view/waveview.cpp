@@ -1,6 +1,7 @@
 #include "waveview.h"
 #include "ui_waveview.h"
 #include "processing.h"
+#include "model/signaltypemodel.h"
 
 using namespace std;
 
@@ -21,6 +22,10 @@ WaveView::WaveView(QWidget *parent) :
 
     ui->mainWaveWidget->setChart(signalChart);
     ui->fftWiget->setChart(fftChart);
+
+    SignalTypeModel *stm = new SignalTypeModel;
+
+    ui->SignalTypeCmbx->setModel(stm);
 
     createFirstAxes();
 }
@@ -80,4 +85,10 @@ void WaveView::updateView(WaveModel &model)
     signalChart->createDefaultAxes();
     fftChart->createDefaultAxes();
 }
+
+int WaveView::getIndexSignalType()
+{
+    ui->SignalTypeCmbx->currentIndex();
+}
+
 
