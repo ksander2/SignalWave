@@ -1,5 +1,6 @@
 #include <QtTest>
 #include "Signals/sinesignal.h"
+#include "processing.h"
 
 class correctSignalTest : public QObject
 {
@@ -14,8 +15,8 @@ private:
     int countSamples;
 
 private slots:
-    void test_case1();
-    void test_case2();
+    void test_signalvalue();
+    void test_fft();
 
 };
 
@@ -29,7 +30,7 @@ correctSignalTest::~correctSignalTest()
     delete testSineSignal;
 }
 
-void correctSignalTest::test_case1()
+void correctSignalTest::test_signalvalue()
 {
    testSineSignal->computeSignal();
    std::vector<std::complex<double>> vectorSignal = testSineSignal->getVector();
@@ -39,10 +40,16 @@ void correctSignalTest::test_case1()
    //QVERIFY(condition)
 }
 
-void correctSignalTest::test_case2()
+void correctSignalTest::test_fft()
 {
+    testSineSignal->computeSignal();
+    auto vectorSignal = testSineSignal->getVector();
+    std::complex<double> *fftArray = vectorSignal.data();
 
-   //QVERIFY(condition)
+    Processing p;
+    p.fft2(fftArray, vectorSignal.size());
+
+    QCOMPARE((int)fftArray[50].imag(), -128);
 }
 
 QTEST_APPLESS_MAIN(correctSignalTest)
