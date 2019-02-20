@@ -6,7 +6,7 @@
 #include <memory>
 
 #include "isignal.h"
-
+class TriangleSingnalPrivate;
 template <typename T>
 class BaseSignal : public ISignal
 {

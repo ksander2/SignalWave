@@ -1,5 +1,7 @@
 #ifndef ISIGNAL_H
 #define ISIGNAL_H
+#include <complex>
+#include <vector>
 
 class ISignal
 {
