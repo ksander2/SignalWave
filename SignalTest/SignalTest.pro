@@ -13,7 +13,6 @@ DEPENDPATH += $$PWD/../Processing
 
 TEMPLATE = app
 
-SOURCES +=  tst_correctsignaltest.cpp \
-    tst_ffttest.cpp
+SOURCES +=  tst_correctsignaltest.cpp
 
 

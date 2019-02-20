@@ -15,6 +15,7 @@ private:
 
 private slots:
     void test_case1();
+    void test_case2();
 
 };
 
@@ -35,6 +36,12 @@ void correctSignalTest::test_case1()
    QCOMPARE(vectorSignal[0].real(), 0);
    QCOMPARE(vectorSignal[127].real(), -0.941544065183016);
    QCOMPARE(vectorSignal.size(), countSamples);
+   //QVERIFY(condition)
+}
+
+void correctSignalTest::test_case2()
+{
+
    //QVERIFY(condition)
 }
 
