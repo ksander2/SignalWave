@@ -32,8 +32,8 @@ void correctSignalTest::test_case1()
 {
    testSineSignal->computeSignal();
    std::vector<std::complex<double>> vectorSignal = testSineSignal->getVector();
-   std::complex<double> complexValue = vectorSignal[0];
-   QCOMPARE(complexValue.real(), 0);
+   QCOMPARE(vectorSignal[0].real(), 0);
+   QCOMPARE(vectorSignal[127].real(), -0.941544065183016);
    QCOMPARE(vectorSignal.size(), countSamples);
    //QVERIFY(condition)
 }
