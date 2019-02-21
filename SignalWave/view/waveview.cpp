@@ -18,7 +18,7 @@ WaveView::WaveView(QWidget *parent) :
     signalChart->setTitle("Signal");
 
     fftChart->legend()->hide();
-    fftChart->setTitle("FFT");
+    fftChart->setTitle("Fast fourier transform");
 
     ui->mainWaveWidget->setChart(signalChart);
     ui->fftWiget->setChart(fftChart);
@@ -52,12 +52,14 @@ void WaveView::createFirstAxes()
     signalSeries->append(100,0);
     signalChart->addSeries(signalSeries);
     signalChart->createDefaultAxes();
+    signalChart->axisX()->setTitleText("Frequency, Hz");
 
     QLineSeries * fftSeries = new QLineSeries;
     fftSeries->append(0, 0);
     fftSeries->append(100,0);
     fftChart->addSeries(fftSeries);
     fftChart->createDefaultAxes();
+    fftChart->axisX()->setTitleText("Samples");
 }
 
 void WaveView::updateView(WaveModel &model)
@@ -90,6 +92,8 @@ void WaveView::updateView(WaveModel &model)
 
     signalChart->createDefaultAxes();
     fftChart->createDefaultAxes();
+    signalChart->axisX()->setTitleText("Frequency, Hz");
+    fftChart->axisX()->setTitleText("Samples");
 }
 
 int WaveView::getIndexSignalType()

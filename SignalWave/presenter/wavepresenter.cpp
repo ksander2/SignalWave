@@ -81,18 +81,16 @@ void WavePresenter::addSineSignal(int frequency, int amplitude, int samples)
         msg.setText(error.what());
         msg.exec();
     }
-
 }
 
 void WavePresenter::addSineSignalToView(ISignal *signal)
 {
-
     auto vectorSignal = signal->getVector();
 
     std::complex<double> *fftArray = vectorSignal.data();
 
     Processing p;
-    p.fft2(fftArray, vectorSignal.size());
+    p.fft2(fftArray, (int)vectorSignal.size());
 
     WaveModel model;
     model.fft = fftArray;
@@ -100,7 +98,6 @@ void WavePresenter::addSineSignalToView(ISignal *signal)
     model.signal = signal->getVector();
 
     _waveView->updateView(model);
-
 }
 
 ISignal *WavePresenter::buildSignalPtr(int frequency, int amplitude, int samples)
