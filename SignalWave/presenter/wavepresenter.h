@@ -18,10 +18,12 @@ public:
 private:
     WaveView *_waveView;
 
-    ISignal *sSignal;
+    ISignal *currentSignal;
     void buildSignal(int frequency, int amplitude, int samples);
     void addSineSignal(int frequency, int amplitude, int samples);
     void addSineSignalToView(ISignal *signal);
+    ISignal *buildSignalPtr(int frequency, int amplitude, int samples);
+
 
 };
 

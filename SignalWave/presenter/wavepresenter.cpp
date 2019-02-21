@@ -9,7 +9,7 @@
 
 WavePresenter::WavePresenter()
     : _waveView(new WaveView),
-      sSignal(nullptr)
+      currentSignal(nullptr)
 {
     connect(_waveView, &WaveView::buildSineSignal, this, &WavePresenter::buildSignal);
     connect(_waveView, &WaveView::addSineSignal, this, &WavePresenter::addSineSignal);
@@ -17,9 +17,9 @@ WavePresenter::WavePresenter()
 
 WavePresenter::~WavePresenter()
 {
-    if(sSignal != nullptr)
+    if(currentSignal != nullptr)
     {
-        delete sSignal;
+        delete currentSignal;
     }
 }
 
@@ -30,36 +30,21 @@ void WavePresenter::showView()
 
 void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
 {
-    if(sSignal != nullptr)
+    if(currentSignal != nullptr)
     {
-        delete sSignal;
+        delete currentSignal;
     }
+    currentSignal = buildSignalPtr(frequency, amplitude, samples);
 
-    switch (_waveView->getIndexSignalType()) {
-    case 0:
-        sSignal = new SineSignal(frequency, amplitude, samples);
-        break;
-    case 1:
-        sSignal = new SquareSignal(frequency, amplitude, samples);
-        break;
-    case 2:
-        sSignal = new SawSignal(frequency, amplitude, samples);
-        break;
-    case 3:
-        sSignal = new TriangleSignal(frequency, amplitude, samples);
-        break;
-    default:
-        break;
-    }
-    sSignal->computeSignal();
-    addSineSignalToView(sSignal);
+    currentSignal->computeSignal();
+    addSineSignalToView(currentSignal);
 }
 
 void WavePresenter::addSineSignal(int frequency, int amplitude, int samples)
 {
     try {
 
-        if(samples != sSignal->getSamples())
+        if(samples != currentSignal->getSamples())
         {
             throw std::runtime_error("Count samples must be the same as in base signal");
         }
@@ -68,29 +53,12 @@ void WavePresenter::addSineSignal(int frequency, int amplitude, int samples)
             throw std::runtime_error("Samples must be greater than 2x frequency");
         }
 
-        ISignal  *ss = nullptr;
-
-        switch (_waveView->getIndexSignalType()) {
-        case 0:
-            ss = new SineSignal(frequency, amplitude, samples);
-            break;
-        case 1:
-            ss = new SquareSignal(frequency, amplitude, samples);
-            break;
-        case 2:
-            ss = new SawSignal(frequency, amplitude, samples);
-            break;
-        case 3:
-            ss = new TriangleSignal(frequency, amplitude, samples);
-            break;
-        default:
-            break;
-        }
+        ISignal  *ss = buildSignalPtr(frequency, amplitude, samples);
 
         ss->computeSignal();
-        sSignal->append(*ss);
+        currentSignal->append(*ss);
 
-        addSineSignalToView(sSignal);
+        addSineSignalToView(currentSignal);
         delete ss;
     }
     catch (std::runtime_error &error) {
@@ -118,4 +86,28 @@ void WavePresenter::addSineSignalToView(ISignal *signal)
 
     _waveView->updateView(model);
 
+}
+
+ISignal *WavePresenter::buildSignalPtr(int frequency, int amplitude, int samples)
+{
+    ISignal  *builtSignal = nullptr;
+
+    switch (_waveView->getIndexSignalType()) {
+    case 0:
+        builtSignal = new SineSignal(frequency, amplitude, samples);
+        break;
+    case 1:
+        builtSignal = new SquareSignal(frequency, amplitude, samples);
+        break;
+    case 2:
+        builtSignal = new SawSignal(frequency, amplitude, samples);
+        break;
+    case 3:
+        builtSignal = new TriangleSignal(frequency, amplitude, samples);
+        break;
+    default:
+        break;
+    }
+
+    return builtSignal;
 }
