@@ -5,6 +5,8 @@
 #include "Signals/sawsignal.h"
 #include "Signals/trianglesignal.h"
 
+#include <QMessageBox>
+
 WavePresenter::WavePresenter()
     : _waveView(new WaveView),
       sSignal(nullptr)
@@ -55,30 +57,47 @@ void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
 
 void WavePresenter::addSineSignal(int frequency, int amplitude, int samples)
 {
-    ISignal  *ss;
+    try {
 
-    switch (_waveView->getIndexSignalType()) {
-    case 0:
-        ss = new SineSignal(frequency, amplitude, samples);
-        break;
-    case 1:
-        ss = new SquareSignal(frequency, amplitude, samples);
-        break;
-    case 2:
-        ss = new SawSignal(frequency, amplitude, samples);
-        break;
-    case 3:
-        ss = new TriangleSignal(frequency, amplitude, samples);
-        break;
-    default:
-        break;
+        if(samples != sSignal->getSamples())
+        {
+            throw std::runtime_error("Count samples must be the same as in base signal");
+        }
+        if(frequency > samples / 2)
+        {
+            throw std::runtime_error("Samples must be greater than 2x frequency");
+        }
+
+        ISignal  *ss = nullptr;
+
+        switch (_waveView->getIndexSignalType()) {
+        case 0:
+            ss = new SineSignal(frequency, amplitude, samples);
+            break;
+        case 1:
+            ss = new SquareSignal(frequency, amplitude, samples);
+            break;
+        case 2:
+            ss = new SawSignal(frequency, amplitude, samples);
+            break;
+        case 3:
+            ss = new TriangleSignal(frequency, amplitude, samples);
+            break;
+        default:
+            break;
+        }
+
+        ss->computeSignal();
+        sSignal->append(*ss);
+
+        addSineSignalToView(sSignal);
+        delete ss;
     }
-
-    ss->computeSignal();
-    sSignal->append(*ss);
-
-    addSineSignalToView(sSignal);
-    delete ss;
+    catch (std::runtime_error &error) {
+        QMessageBox msg;
+        msg.setText(error.what());
+        msg.exec();
+    }
 
 }
 
