@@ -34,16 +34,31 @@ void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
     {
         delete currentSignal;
     }
-    currentSignal = buildSignalPtr(frequency, amplitude, samples);
+    try {
+        if(frequency > samples / 2)
+        {
+            throw std::runtime_error("Samples must be greater than 2x frequency");
+        }
+        currentSignal = buildSignalPtr(frequency, amplitude, samples);
 
-    currentSignal->computeSignal();
-    addSineSignalToView(currentSignal);
+        currentSignal->computeSignal();
+        addSineSignalToView(currentSignal);
+    }
+    catch (std::runtime_error &error) {
+        QMessageBox msg;
+        msg.setText(error.what());
+        msg.exec();
+    }
 }
 
 void WavePresenter::addSineSignal(int frequency, int amplitude, int samples)
 {
     try {
 
+        if(currentSignal == nullptr)
+        {
+            throw std::runtime_error("Need build singal firstly");
+        }
         if(samples != currentSignal->getSamples())
         {
             throw std::runtime_error("Count samples must be the same as in base signal");
