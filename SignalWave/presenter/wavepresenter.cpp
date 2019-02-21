@@ -11,8 +11,8 @@ WavePresenter::WavePresenter()
     : _waveView(new WaveView),
       currentSignal(nullptr)
 {
-    connect(_waveView, &WaveView::buildSineSignal, this, &WavePresenter::buildSignal);
-    connect(_waveView, &WaveView::addSineSignal, this, &WavePresenter::addSineSignal);
+    connect(_waveView, &WaveView::buildSineSignal, this, &WavePresenter::onBuildSignalClicked);
+    connect(_waveView, &WaveView::addSineSignal, this, &WavePresenter::onnAddSignalClicked);
 }
 
 WavePresenter::~WavePresenter()
@@ -28,7 +28,7 @@ void WavePresenter::showView()
     _waveView->show();
 }
 
-void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
+void WavePresenter::onBuildSignalClicked(int frequency, int amplitude, int samples)
 {
     if(currentSignal != nullptr)
     {
@@ -51,7 +51,7 @@ void WavePresenter::buildSignal(int frequency, int amplitude, int samples)
     }
 }
 
-void WavePresenter::addSineSignal(int frequency, int amplitude, int samples)
+void WavePresenter::onnAddSignalClicked(int frequency, int amplitude, int samples)
 {
     try {
 
@@ -90,7 +90,7 @@ void WavePresenter::addSineSignalToView(ISignal *signal)
     std::complex<double> *fftArray = vectorSignal.data();
 
     Processing p;
-    p.fft2(fftArray, (int)vectorSignal.size());
+    p.fft2(fftArray, static_cast<int>(vectorSignal.size()));
 
     WaveModel model;
     model.fft = fftArray;
