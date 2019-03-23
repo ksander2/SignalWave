@@ -1,11 +1,18 @@
 #ifndef MAINPRESENTER_H
 #define MAINPRESENTER_H
 
+#include <QObject>
 
-class MainPresenter
+class MainPresenter : public QObject
 {
+    Q_OBJECT
 public:
-    MainPresenter();
+    explicit MainPresenter(QObject *parent = nullptr);
+
+signals:
+
+public slots:
+    void do1();
 };
 
 #endif // MAINPRESENTER_H
