@@ -3,7 +3,8 @@ TEMPLATE = subdirs
 SUBDIRS += \
     SignalWave \
     Processing \
-    SignalTest
+    SignalTest \
+    SignalWaveQuick
 
 SignalWave.depends = Processing
 SignalTest.depends = Processing
