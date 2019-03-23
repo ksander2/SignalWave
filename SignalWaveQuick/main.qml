@@ -16,7 +16,10 @@ Window {
 
         Button
         {
+            objectName: "InfoButton"
+            signal click1()
             text: "1111"
+            onClicked: click1()
         }
 
         Button
@@ -29,8 +32,8 @@ Window {
             title: "Line"
             antialiasing: true
 
-             height: 400
-             width: 400
+            height: 400
+            width: 400
 
             LineSeries {
                 name: "LineSeries"
