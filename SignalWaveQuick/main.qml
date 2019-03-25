@@ -25,9 +25,11 @@ Window {
             objectName: "InfoButton"
             signal click1()
             text: "1111"
-            onClicked: btn2.text = mp1.compute(444, 66)
-
-
+            onClicked:
+            {
+                var dd = mp1.computevec()
+                btn2.text = mp1.compute(444, 66)
+            }
         }
 
         Button
