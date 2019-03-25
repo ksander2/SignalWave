@@ -9,6 +9,7 @@ class MainPresenter : public QObject
 public:
     explicit MainPresenter(QObject *parent = nullptr);
 
+    Q_INVOKABLE int compute(int a, int b);
 signals:
 
 public slots:

@@ -3,6 +3,7 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import QtCharts 2.0
+import com.myinc.Calculation 1.0
 
 Window {
     visible: true
@@ -14,16 +15,24 @@ Window {
         anchors.fill: parent
         anchors.margins: 10
 
+        MainPresenter
+        {
+            id: mp1
+        }
+
         Button
         {
             objectName: "InfoButton"
             signal click1()
             text: "1111"
-            onClicked: click1()
+            onClicked: btn2.text = mp1.compute(444, 66)
+
+
         }
 
         Button
         {
+            id: btn2
             text: "2222"
         }
 
