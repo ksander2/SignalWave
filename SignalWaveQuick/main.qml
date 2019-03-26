@@ -40,6 +40,8 @@ Window {
             SpinBox
             {
                 id: frequencySbx
+                from: 0
+                to: 1200
                 value: 20
             }
 
@@ -47,9 +49,12 @@ Window {
             {
                 text: "Выборки"
             }
+
             SpinBox
             {
                 id: samplesSbx
+                from: 0
+                to: 1200
                 value: 256
             }
 
