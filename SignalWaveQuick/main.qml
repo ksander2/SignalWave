@@ -58,6 +58,16 @@ Window {
                 value: 256
             }
 
+            Text
+            {
+                text: "Тип"
+            }
+
+            ComboBox {
+                width: 200
+                model: [ "Sine", "Triangle", "Saw" ]
+            }
+
             Button
             {
                 objectName: "InfoButton"
