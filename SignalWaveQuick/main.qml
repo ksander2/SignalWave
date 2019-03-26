@@ -16,6 +16,7 @@ Window {
         anchors.margins: 10
         width: parent.width
 
+
         MainPresenter
         {
             id: mp1
@@ -27,47 +28,75 @@ Window {
 
         }
 
-        Button
+        GridLayout
         {
-            objectName: "InfoButton"
-            signal click1()
-            text: "1111"
-            onClicked:
+            columns: 2
+
+            Text
             {
-                var dd = mp1.computevec()
+                text: "Частота"
+            }
 
-                chv1.removeAllSeries()
-                var series1 = chv1.createSeries(ChartView.SeriesTypeLine, "first")
+            SpinBox
+            {
+                id: frequencySbx
+                value: 20
+            }
 
-                series1.axisX.min = 0;
-                series1.axisX.max = 270;
-                series1.axisY.min = -1.2;
-                series1.axisY.max = 1.2;
-                series1.axisY.tickCount = 6;
-                series1.axisY.titleText = "speed (kph)";
-                series1.axisX.titleText = "speed trap";
-                series1.axisX.labelFormat = "%.0f";
+            Text
+            {
+                text: "Выборки"
+            }
+            SpinBox
+            {
+                id: samplesSbx
+                value: 256
+            }
 
-                for(var i=0; i < 256; i++)
+            Button
+            {
+                objectName: "InfoButton"
+                signal click1()
+                text: "Build Signal"
+                onClicked:
                 {
-                    series1.append(i, dd[i])
+                    var dd = mp1.computevec(frequencySbx.value, 1, samplesSbx.value)
+
+                    chv1.removeAllSeries()
+                    var series1 = chv1.createSeries(ChartView.SeriesTypeLine, "first")
+
+                    series1.axisX.min = 0;
+                    series1.axisX.max = 270;
+                    series1.axisY.min = -1.2;
+                    series1.axisY.max = 1.2;
+                    series1.axisY.tickCount = 6;
+                    series1.axisY.titleText = "speed (kph)";
+                    series1.axisX.titleText = "speed trap";
+                    series1.axisX.labelFormat = "%.0f";
+
+                    for(var i=0; i < samplesSbx.value; i++)
+                    {
+                        series1.append(i, dd[i])
+
+                    }
+
+                    // btn2.text = mp1.compute(444, 66)
+                }
+            }
+            Button
+            {
+                id: btn2
+                text: "+"
+
+                onClicked:
+                {
 
                 }
-
-               // btn2.text = mp1.compute(444, 66)
             }
+
+
         }
 
-        Button
-        {
-            id: btn2
-            text: "2222"
-
-            onClicked:
-            {
-
-            }
-        }
 
 
         ChartView {
@@ -77,7 +106,7 @@ Window {
 
             height: 400
             // width: parent.width
-               width: 1200
+            width: 1200
 
         }
 

@@ -18,9 +18,9 @@ int MainPresenter::compute(int a, int b)
     return a + b;
 }
 
-QVector<qreal> MainPresenter::computevec()
+QVector<qreal> MainPresenter::computevec(int frequency, int amplitude, int samples)
 {
-    ISignal *sig = new SineSignal(50, 1, 256);
+    ISignal *sig = new SineSignal(frequency, amplitude, samples);
     sig->computeSignal();
     std::vector<std::complex<double> > vectorSig = sig->getVector();
     std::vector<double> vec(vectorSig.size());
