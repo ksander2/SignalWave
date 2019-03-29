@@ -75,10 +75,14 @@ Window {
                 text: "Build Signal"
                 onClicked:
                 {
-                    var dd = mp1.computevec(frequencySbx.value, 1, samplesSbx.value)
+                    var signalArray = mp1.computevec(frequencySbx.value, 1, samplesSbx.value)
+                    var fftArray = mp1.computefft(signalArray);
 
-                    chv1.removeAllSeries()
-                    var series1 = chv1.createSeries(ChartView.SeriesTypeLine, "first")
+                    signalChartView.removeAllSeries()
+                    fftChartView.removeAllSeries()
+
+                    var series1 = signalChartView.createSeries(ChartView.SeriesTypeLine, "first")
+                    var series2 = fftChartView.createSeries(ChartView.SeriesTypeLine, "first")
 
                     series1.axisX.min = 0;
                     series1.axisX.max = 270;
@@ -89,11 +93,27 @@ Window {
                     series1.axisX.titleText = "speed trap";
                     series1.axisX.labelFormat = "%.0f";
 
-                    for(var i=0; i < samplesSbx.value; i++)
+                    series2.axisX.min = 0;
+                    series2.axisX.max = 270;
+                    series2.axisY.min = -1.2;
+                    series2.axisY.max = 1.2;
+                    series2.axisY.tickCount = 6;
+                    series2.axisY.titleText = "speed (kph)";
+                    series2.axisX.titleText = "speed trap";
+                    series2.axisX.labelFormat = "%.0f";
+
+                    for(var i = 0; i < samplesSbx.value; i++)
                     {
-                        series1.append(i, dd[i])
+                        series1.append(i, signalArray[i])
 
                     }
+
+                    for(var i = 0; i < samplesSbx.value/2; i++)
+                    {
+                        series2.append(i, fftArray[i])
+
+                    }
+
 
                     // btn2.text = mp1.compute(444, 66)
                 }
@@ -113,7 +133,7 @@ Window {
         }
 
         ChartView {
-            id: chv1
+            id: signalChartView
             title: "signal"
             antialiasing: true
 
@@ -129,7 +149,7 @@ Window {
         }
 
         ChartView {
-            id: chv2
+            id: fftChartView
             title: "fft"
             antialiasing: true
 

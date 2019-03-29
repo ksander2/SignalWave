@@ -1,12 +1,11 @@
 #include "mainpresenter.h"
 #include <QMessageBox>
 #include "Signals/isignal.h"
+#include <iostream>
 
 #include "processing.h"
 
 #include "Signals/sinesignal.h"
-
-
 
 MainPresenter::MainPresenter(QObject *parent) : QObject(parent)
 {
@@ -33,6 +32,38 @@ QVector<qreal> MainPresenter::computevec(int frequency, int amplitude, int sampl
     }
 
     return vec1;
+}
+
+QVector<qreal> MainPresenter::computefft(const QVector<qreal> &array)
+{
+
+    std::complex<double> *fftArray = new std::complex<double>[array.size()];
+    for(int i=0; i< array.size(); i++)
+    {
+        std::complex<double> *ffttemp = fftArray + i;
+       *ffttemp = array[i];
+      // *fftArray[i] = *ffttemp;
+        //fftArray[i] ffttemp
+        int a =0;
+        a++;
+    }
+
+    for(int i=0; i< array.size(); i++)
+    {
+        std::cout << fftArray[i] << std::endl;
+    }
+
+    Processing p;
+    p.fft2(fftArray, static_cast<int>(array.size()));
+
+    QVector<qreal> vecfft(array.size()/2);
+
+    for(int i=0; i< vecfft.size(); i++)
+    {
+       vecfft[i] = fftArray[i].real();
+    }
+
+    return vecfft;
 }
 
 void MainPresenter::do1()

@@ -13,6 +13,7 @@ public:
 
     Q_INVOKABLE int compute(int a, int b);
     Q_INVOKABLE QVector<qreal> computevec(int frequency, int amplitude, int samples);
+    Q_INVOKABLE QVector<qreal> computefft(const QVector<qreal> &array);
 signals:
 
 public slots:
