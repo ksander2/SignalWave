@@ -43,6 +43,7 @@ Window {
                 from: 0
                 to: 1200
                 value: 20
+                editable: true
             }
 
             Text
@@ -56,6 +57,7 @@ Window {
                 from: 0
                 to: 1200
                 value: 256
+                editable: true
             }
 
             Text
@@ -78,6 +80,8 @@ Window {
                     var signalArray = mp1.computevec(frequencySbx.value, 1, samplesSbx.value)
                     var fftArray = mp1.computefft(signalArray);
 
+                    var maxfft = Math.max.apply(Math, fftArray)
+
                     signalChartView.removeAllSeries()
                     fftChartView.removeAllSeries()
 
@@ -85,7 +89,7 @@ Window {
                     var series2 = fftChartView.createSeries(ChartView.SeriesTypeLine, "first")
 
                     series1.axisX.min = 0;
-                    series1.axisX.max = 270;
+                    series1.axisX.max = signalArray.length;
                     series1.axisY.min = -1.2;
                     series1.axisY.max = 1.2;
                     series1.axisY.tickCount = 6;
@@ -94,9 +98,9 @@ Window {
                     series1.axisX.labelFormat = "%.0f";
 
                     series2.axisX.min = 0;
-                    series2.axisX.max = 270;
-                    series2.axisY.min = -1.2;
-                    series2.axisY.max = 1.2;
+                    series2.axisX.max = fftArray.length / 2;
+                    series2.axisY.min = 0;
+                    series2.axisY.max = maxfft;
                     series2.axisY.tickCount = 6;
                     series2.axisY.titleText = "speed (kph)";
                     series2.axisX.titleText = "speed trap";
@@ -105,13 +109,11 @@ Window {
                     for(var i = 0; i < samplesSbx.value; i++)
                     {
                         series1.append(i, signalArray[i])
-
                     }
 
                     for(var i = 0; i < samplesSbx.value/2; i++)
-                    {
+                    {              
                         series2.append(i, fftArray[i])
-
                     }
 
 
