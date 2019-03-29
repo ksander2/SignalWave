@@ -8,7 +8,7 @@ import com.myinc.Calculation 1.0
 Window {
     visible: true
     width: 1200
-    height: 480
+    height: 780
     title: qsTr("Hello World")
 
     ColumnLayout {
@@ -112,16 +112,35 @@ Window {
 
         }
 
-
-
         ChartView {
             id: chv1
-            title: "Line"
+            title: "signal"
             antialiasing: true
 
-            height: 400
-            // width: parent.width
-            width: 1200
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+
+            LineSeries {
+
+                XYPoint { x: 0; y: 0 }
+                XYPoint { x: 100; y: 0 }
+            }
+
+        }
+
+        ChartView {
+            id: chv2
+            title: "fft"
+            antialiasing: true
+
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+
+            LineSeries {
+
+                XYPoint { x: 0; y: 0 }
+                XYPoint { x: 100; y: 0 }
+            }
 
         }
 
