@@ -66,8 +66,9 @@ Window {
             }
 
             ComboBox {
+                id: signalTypeCmbx
                 width: 200
-                model: [ "Sine", "Triangle", "Saw" ]
+                model: [ "Sine", "Square", "Saw", "Triangle" ]
             }
 
             Button
@@ -77,7 +78,7 @@ Window {
                 text: "Build Signal"
                 onClicked:
                 {
-                    var signalArray = mp1.computevec(frequencySbx.value, 1, samplesSbx.value)
+                    var signalArray = mp1.computevec(frequencySbx.value, 1, samplesSbx.value, signalTypeCmbx.currentIndex)
                     var fftArray = mp1.computefft(signalArray);
 
                     var maxfft = Math.max.apply(Math, fftArray)
@@ -98,7 +99,7 @@ Window {
                     series1.axisX.labelFormat = "%.0f";
 
                     series2.axisX.min = 0;
-                    series2.axisX.max = fftArray.length / 2;
+                    series2.axisX.max = fftArray.length;
                     series2.axisY.min = 0;
                     series2.axisY.max = maxfft;
                     series2.axisY.tickCount = 6;
