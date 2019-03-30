@@ -54,7 +54,7 @@ QVector<qreal> MainPresenter::computefft(const QVector<qreal> &array)
 
     for(int i=0; i< vecfft.size(); i++)
     {
-       vecfft[i] = abs(fftArray[i].imag());
+       vecfft[i] = abs(fftArray[i]);
     }
 
     return vecfft;

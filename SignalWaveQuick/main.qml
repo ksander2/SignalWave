@@ -22,12 +22,6 @@ Window {
             id: mp1
         }
 
-        LineSeries {
-            id: lineSeries
-            name: "LineSeries2"
-
-        }
-
         GridLayout
         {
             columns: 2
@@ -81,6 +75,9 @@ Window {
                     var signalArray = mp1.computevec(frequencySbx.value, 1, samplesSbx.value, signalTypeCmbx.currentIndex)
                     var fftArray = mp1.computefft(signalArray);
 
+                    var maxSignalY = Math.max.apply(Math, signalArray)
+                    var minSignalY = Math.min.apply(Math, signalArray)
+
                     var maxfft = Math.max.apply(Math, fftArray)
 
                     signalChartView.removeAllSeries()
@@ -91,11 +88,11 @@ Window {
 
                     series1.axisX.min = 0;
                     series1.axisX.max = signalArray.length;
-                    series1.axisY.min = -1.2;
-                    series1.axisY.max = 1.2;
+                    series1.axisY.min = minSignalY; //+ minSignalY * 0.2;
+                    series1.axisY.max = maxSignalY; //+ maxSignalY * 0.2;
                     series1.axisY.tickCount = 6;
-                    series1.axisY.titleText = "speed (kph)";
-                    series1.axisX.titleText = "speed trap";
+                    series1.axisY.titleText = "Amplitude";
+                    series1.axisX.titleText = "Frequency, Hz";
                     series1.axisX.labelFormat = "%.0f";
 
                     series2.axisX.min = 0;
@@ -103,8 +100,8 @@ Window {
                     series2.axisY.min = 0;
                     series2.axisY.max = maxfft;
                     series2.axisY.tickCount = 6;
-                    series2.axisY.titleText = "speed (kph)";
-                    series2.axisX.titleText = "speed trap";
+                    series2.axisY.titleText = "Amplitude";
+                    series2.axisX.titleText = "Frequency, Hz";
                     series2.axisX.labelFormat = "%.0f";
 
                     for(var i = 0; i < samplesSbx.value; i++)
@@ -113,7 +110,7 @@ Window {
                     }
 
                     for(var i = 0; i < samplesSbx.value/2; i++)
-                    {              
+                    {                  
                         series2.append(i, fftArray[i])
                     }
 
