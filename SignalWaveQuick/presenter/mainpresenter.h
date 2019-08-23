@@ -19,8 +19,6 @@ public:
 private:
     ISignal *buildSignalPtr(int frequency, int amplitude, int samples, int type);
 
-public slots:
-    void do1();
 };
 
 #endif // MAINPRESENTER_H

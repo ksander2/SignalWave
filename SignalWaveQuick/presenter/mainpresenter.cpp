@@ -60,14 +60,6 @@ QVector<qreal> MainPresenter::computefft(const QVector<qreal> &array)
     return vecfft;
 }
 
-void MainPresenter::do1()
-{
-    QMessageBox msg;
-    msg.setText("111dsds");
-    msg.exec();
-
-}
-
 ISignal *MainPresenter::buildSignalPtr(int frequency, int amplitude, int samples, int type)
 {
     ISignal  *builtSignal = nullptr;

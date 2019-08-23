@@ -68,13 +68,13 @@ void WavePresenter::onnAddSignalClicked(int frequency, int amplitude, int sample
             throw std::runtime_error("Samples must be greater than 2x frequency");
         }
 
-        ISignal  *ss = buildSignalPtr(frequency, amplitude, samples);
+        ISignal *modelSignal = buildSignalPtr(frequency, amplitude, samples);
 
-        ss->computeSignal();
-        currentSignal->append(*ss);
+        modelSignal->computeSignal();
+        currentSignal->append(*modelSignal);
 
         addSineSignalToView(currentSignal);
-        delete ss;
+        delete modelSignal;
     }
     catch (std::runtime_error &error) {
         QMessageBox msg;
@@ -89,8 +89,8 @@ void WavePresenter::addSineSignalToView(ISignal *signal)
 
     std::complex<double> *fftArray = vectorSignal.data();
 
-    Processing p;
-    p.fft2(fftArray, static_cast<int>(vectorSignal.size()));
+    Processing process;
+    process.fft2(fftArray, static_cast<int>(vectorSignal.size()));
 
     WaveModel model;
     model.fft = fftArray;

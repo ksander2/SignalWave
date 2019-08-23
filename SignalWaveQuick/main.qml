@@ -16,7 +16,6 @@ Window {
         anchors.margins: 10
         width: parent.width
 
-
         MainPresenter
         {
             id: mp1
@@ -163,7 +162,5 @@ Window {
             }
 
         }
-
-
     }
 }
