@@ -12,8 +12,8 @@ class SignalTypeModel  : public QAbstractListModel
 
 public:
     explicit SignalTypeModel(QObject *parent = 0);
-    virtual QVariant data( const QModelIndex &index, int role = Qt::DisplayRole ) const;
-    virtual int rowCount( const QModelIndex &parent = QModelIndex() ) const;
+    virtual QVariant data( const QModelIndex & index, int role = Qt::DisplayRole ) const;
+    virtual int rowCount( const QModelIndex & parent = QModelIndex() ) const;
 };
 
 #endif // SIGNALTYPEMODEL_H

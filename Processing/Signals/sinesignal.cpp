@@ -3,7 +3,8 @@
 
 using namespace std;
 
-SineSignal::SineSignal(int frequency, double period, int samples) : BaseSignal<SineSignalPrivate>(frequency, period, samples)
+SineSignal::SineSignal(int frequency, double period,
+                       int samples) : BaseSignal<SineSignalPrivate>(frequency, period, samples)
 {
 
 }

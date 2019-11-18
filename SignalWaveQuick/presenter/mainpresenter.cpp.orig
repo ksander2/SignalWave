@@ -40,19 +40,21 @@ QVector<qreal> MainPresenter::computefft(const QVector<qreal> &array)
 {
 
     std::complex<double> *fftArray = new std::complex<double>[array.size()];
-    for (int i = 0; i < array.size(); i++) {
+    for(int i=0; i< array.size(); i++)
+    {
         std::complex<double> *ffttemp = fftArray + i;
         *ffttemp = array[i];
-        *(fftArray + i) =  *ffttemp;
+        *(fftArray +i) =  *ffttemp;
     }
 
     Processing p;
     p.fft2(fftArray, static_cast<int>(array.size()));
 
-    QVector<qreal> vecfft(array.size() / 2);
+    QVector<qreal> vecfft(array.size()/2);
 
-    for (int i = 0; i < vecfft.size(); i++) {
-        vecfft[i] = abs(fftArray[i]);
+    for(int i=0; i< vecfft.size(); i++)
+    {
+       vecfft[i] = abs(fftArray[i]);
     }
 
     return vecfft;

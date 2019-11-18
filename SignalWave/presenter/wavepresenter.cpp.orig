@@ -17,7 +17,8 @@ WavePresenter::WavePresenter()
 
 WavePresenter::~WavePresenter()
 {
-    if (currentSignal != nullptr) {
+    if(currentSignal != nullptr)
+    {
         delete currentSignal;
     }
 }
@@ -29,18 +30,21 @@ void WavePresenter::showView()
 
 void WavePresenter::onBuildSignalClicked(int frequency, int amplitude, int samples)
 {
-    if (currentSignal != nullptr) {
+    if(currentSignal != nullptr)
+    {
         delete currentSignal;
     }
     try {
-        if (frequency > samples / 2) {
+        if(frequency > samples / 2)
+        {
             throw std::runtime_error("Samples must be greater than 2x frequency");
         }
         currentSignal = buildSignalPtr(frequency, amplitude, samples);
 
         currentSignal->computeSignal();
         addSineSignalToView(currentSignal);
-    } catch (std::runtime_error &error) {
+    }
+    catch (std::runtime_error &error) {
         QMessageBox msg;
         msg.setText(error.what());
         msg.exec();
@@ -51,13 +55,16 @@ void WavePresenter::onnAddSignalClicked(int frequency, int amplitude, int sample
 {
     try {
 
-        if (currentSignal == nullptr) {
+        if(currentSignal == nullptr)
+        {
             throw std::runtime_error("Need build singal firstly");
         }
-        if (samples != currentSignal->getSamples()) {
+        if(samples != currentSignal->getSamples())
+        {
             throw std::runtime_error("Count samples must be the same as in base signal");
         }
-        if (frequency > samples / 2) {
+        if(frequency > samples / 2)
+        {
             throw std::runtime_error("Samples must be greater than 2x frequency");
         }
 
@@ -68,7 +75,8 @@ void WavePresenter::onnAddSignalClicked(int frequency, int amplitude, int sample
 
         addSineSignalToView(currentSignal);
         delete modelSignal;
-    } catch (std::runtime_error &error) {
+    }
+    catch (std::runtime_error &error) {
         QMessageBox msg;
         msg.setText(error.what());
         msg.exec();

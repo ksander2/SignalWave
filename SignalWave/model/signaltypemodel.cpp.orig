@@ -10,25 +10,28 @@ SignalTypeModel::SignalTypeModel(QObject *parent) : QAbstractListModel(parent)
 
 QVariant SignalTypeModel::data( const QModelIndex &index, int role ) const
 {
-    const DataPair &data = m_content.at( index.row() );
-    QVariant value;
+    const DataPair& data = m_content.at( index.row() );
+        QVariant value;
 
-    switch ( role ) {
-    case Qt::DisplayRole: {
-        value = data.first;
-    }
-    break;
+        switch ( role )
+        {
+            case Qt::DisplayRole:
+            {
+                value = data.first;
+            }
+            break;
 
-    case Qt::UserRole: {
-        value = data.second;
-    }
-    break;
+            case Qt::UserRole:
+            {
+                value = data.second;
+            }
+            break;
 
-    default:
-        break;
-    }
+            default:
+                break;
+        }
 
-    return value;
+        return value;
 }
 
 int SignalTypeModel::rowCount(const QModelIndex &/*parent*/) const

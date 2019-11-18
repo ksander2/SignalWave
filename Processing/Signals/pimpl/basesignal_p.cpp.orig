@@ -22,7 +22,8 @@ std::vector<std::complex<double> > BaseSignal_p::getVector()
 
 void BaseSignal_p::append(std::vector<std::complex<double> > data)
 {
-    if (_data.size() != data.size()) {
+    if(_data.size() != data.size())
+    {
         throw std::runtime_error("количество выборок не совпадает");
     }
 
@@ -38,5 +39,5 @@ int BaseSignal_p::getSamples() const
 
 void BaseSignal_p::computeSignal()
 {
-    calculate(_data, _frequency, _samples);
+     calculate(_data, _frequency, _samples);
 }
